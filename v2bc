@@ -8,7 +8,7 @@ from blockchain_config import BlockchainConfig, Node
 desc = """V2 ethereum Blockchain - A set of tools to install, create ethereum
 nodes and connect to the V2 experimental ethereum blockchain."""
 
-commands = ['create', 'console', 'attach', 'start', 'run', 'configstring', 'list']
+commands = ['create', 'console', 'attach', 'start', 'run', 'mine', 'configstring', 'list']
 
 parser = argparse.ArgumentParser(description=desc)
 parser.add_argument(
@@ -50,28 +50,32 @@ if args["command"] == "create":
     else:
         print("Error: Node already exists.")
 
-if args["command"] == "console":
+elif args["command"] == "console":
     subprocess.call("geth " + config.getConfigString(node) + " console", shell=True)
 
-if args["command"] == "attach":
+elif args["command"] == "attach":
     subprocess.call("geth attach "+config.path+"/"+node.data_dir+"/geth.ipc",shell=True)
 
-if args["command"] == "start":
+elif args["command"] == "start":
     call = "geth " + config.getConfigString(node)
     subprocess.call(call,shell=True)
 
-if args["command"] == "stop":
-    pass
+elif args["command"] == "mine":
+    call = "geth " + config.getConfigString(node) + "--mine"
+    subprocess.call(call,shell=True)
 
-if args["command"] == "run":
-    pass
+elif args["command"] == "run":
+    if node is None:
+        print("Error: Node not found.")
+    else:
+        subprocess.call("geth " + config.getConfigString(node) + args["geth-commands"], shell=True)
 
-if args["command"] == "configstring":
+elif args["command"] == "configstring":
     if node is None:
         print("Error: Node not found.")
     else:
         print(config.getConfigString(node))
 
-if args["command"] == "list":
+elif args["command"] == "list":
     for n in config.nodes:
         print(n.identity)

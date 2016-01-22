@@ -91,7 +91,7 @@ class BlockchainConfig(object):
             #print("Genesis file found. All fine.")
             pass
         else:
-            print("Creating genesis file.")
+            print("Creating genesis file at %s" % self.path + "/" + self.genesis)
             f = open(self.path + "/" + self.genesis,"w")
             f.write(V2_GENESIS)
             f.close()
@@ -177,3 +177,6 @@ class BlockchainConfig(object):
             "network_id": self.network_id,
             "nat": self.nat,
         }
+
+    def getIPCSocket(self, node):
+        return self.path + "/" + node.data_dir + "/geth.ipc"
