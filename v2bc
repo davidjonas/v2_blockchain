@@ -1,0 +1,77 @@
+#!/usr/bin/python
+import argparse
+import sys
+import os
+import subprocess
+from blockchain_config import BlockchainConfig, Node
+
+desc = """V2 ethereum Blockchain - A set of tools to install, create ethereum
+nodes and connect to the V2 experimental ethereum blockchain."""
+
+commands = ['create', 'console', 'attach', 'start', 'run', 'configstring', 'list']
+
+parser = argparse.ArgumentParser(description=desc)
+parser.add_argument(
+    'command',
+    help='command to run (options: %s)' % ", ".join(commands),
+    metavar='Command',
+    choices=commands)
+
+parser.add_argument(
+    '--geth-commands',
+    help='Run geth commands on node defined by --id option (multiple)',
+    nargs="+")
+
+parser.add_argument(
+    '--id', '-i',
+    default='v2_blockchain',
+    help='identity of the node or cluster.')
+
+parser.add_argument(
+    '--base-dir',
+    default='~/.blockchain',
+    help='If you want to work on a different base directory. By default it is ~/.blockchain')
+
+parser.add_argument(
+    '--no-account',
+    action='store_true',
+    help='Do not automatically create an account on the new Node')
+
+parsed = parser.parse_args()
+args = vars(parsed)
+blockchainPath = args["base_dir"]
+
+config = BlockchainConfig(blockchainPath)
+node = config.getNodeById(args["id"])
+
+if args["command"] == "create":
+    if node is None:
+        config.createNode(args["id"])
+    else:
+        print("Error: Node already exists.")
+
+if args["command"] == "console":
+    subprocess.call("geth " + config.getConfigString(node) + " console", shell=True)
+
+if args["command"] == "attach":
+    subprocess.call("geth attach "+config.path+"/"+node.data_dir+"/geth.ipc",shell=True)
+
+if args["command"] == "start":
+    call = "geth " + config.getConfigString(node)
+    subprocess.call(call,shell=True)
+
+if args["command"] == "stop":
+    pass
+
+if args["command"] == "run":
+    pass
+
+if args["command"] == "configstring":
+    if node is None:
+        print("Error: Node not found.")
+    else:
+        print(config.getConfigString(node))
+
+if args["command"] == "list":
+    for n in config.nodes:
+        print(n.identity)
