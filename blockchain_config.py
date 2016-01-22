@@ -72,7 +72,6 @@ class BlockchainConfig(object):
         self.network_id = 1000
         self.bootnodes = ["enode://eb6e308b5194349790dc17a95068a1b1c8712c772ca7c3b679baacc3dd8cd8328a6608a7a32545a611e67159c0179e1498d182782b95f71fc1f4c78458fa48c7@52.30.156.83:30300"]
 
-
         if os.path.isdir(self.path):
             #print("Blockchain directory exists. All fine.")
             pass

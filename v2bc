@@ -61,7 +61,7 @@ elif args["command"] == "start":
     subprocess.call(call,shell=True)
 
 elif args["command"] == "mine":
-    call = "geth " + config.getConfigString(node) + "--mine"
+    call = "geth " + config.getConfigString(node) + " --mine"
     subprocess.call(call,shell=True)
 
 elif args["command"] == "run":
