@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Contract editor</title>
+    <script language="javascript" src="js/jquery-2.2.0.min.js"></script>
+    <script language="javascript" src="js/web3.js"></script>
+    <script language="javascript" src="js/ace/ace.js"></script>
+    <script language="javascript" src="js/contracts.js"></script>
+    <script language="javascript" src="js/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="js/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/contracts.css" />
+  </head>
+  <body>
+    <div id="editor"></div>
+    <div id="console"></div>
+    <ul id="toolbox" class="closed">
+            <a href="#" id="compile" alt="Compile and submit." class="toolbox-btn" id="collapseToolbox"><span class="glyphicon glyphicon-ok"></span>
+              <span class="helptip">Compile contract</span>
+            </a>
+            <a href="#" id="clearConsole" alt="Clear console." class="toolbox-btn" id="clearConsole"><span class="glyphicon glyphicon-remove"></span>
+              <span class="helptip">Clear console</span>
+            </a>
+    </ul>
+  </body>
+</html>

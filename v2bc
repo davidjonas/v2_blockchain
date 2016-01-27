@@ -4,11 +4,12 @@ import sys
 import os
 import subprocess
 from blockchain_config import BlockchainConfig, Node
+from ui_server import UIServer
 
 desc = """V2 ethereum Blockchain - A set of tools to install, create ethereum
 nodes and connect to the V2 experimental ethereum blockchain."""
 
-commands = ['create', 'console', 'attach', 'start', 'run', 'mine', 'configstring', 'list']
+commands = ['create', 'console', 'attach', 'start', 'run', 'mine', 'configstring', 'list', 'editor']
 
 parser = argparse.ArgumentParser(description=desc)
 parser.add_argument(
@@ -61,7 +62,7 @@ elif args["command"] == "start":
     subprocess.call(call,shell=True)
 
 elif args["command"] == "mine":
-    call = "geth " + config.getConfigString(node) + " --mine"
+    call = "geth " + config.getConfigString(node) + ' --mine --minerthreads "1"'
     subprocess.call(call,shell=True)
 
 elif args["command"] == "run":
@@ -79,3 +80,13 @@ elif args["command"] == "configstring":
 elif args["command"] == "list":
     for n in config.nodes:
         print(n.identity)
+
+elif args["command"] == "editor":
+    import webbrowser
+    s = UIServer()
+    s.start()
+    webbrowser.open("http://localhost:8888/contracts.html",new=2)
+    try:
+        input("Press enter to stop the editor")
+    except:
+        s.kill()

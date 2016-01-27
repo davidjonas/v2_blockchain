@@ -165,7 +165,7 @@ class BlockchainConfig(object):
         return None
 
     def getConfigString(self, node):
-        return '--autodag="%(autodag)s" --identity="%(identity)s" --bootnodes="%(bootnodes)s" --genesis="%(genesis)s" --rpc --rpcapi="db,eth,net,web3" --rpcport="%(rpc_port)s" --rpccorsdomain="localhost" --datadir="%(data_dir)s" --port="%(port)s" --ipcapi="admin,db,eth,debug,miner,net,shh,txpool,personal,web3" --networkid="%(network_id)s" --nat="%(nat)s"' % {
+        return '--autodag="%(autodag)s" --identity="%(identity)s" --bootnodes="%(bootnodes)s" --genesis="%(genesis)s" --rpc --rpcapi="db,eth,net,web3" --rpcport="%(rpc_port)s" --rpccorsdomain="*" --datadir="%(data_dir)s" --port="%(port)s" --ipcapi="admin,db,eth,debug,miner,net,shh,txpool,personal,web3" --networkid="%(network_id)s" --nat="%(nat)s"' % {
             "autodag": self.autodag,
             "identity": node.identity,
             "bootnodes":" ".join(self.bootnodes),
