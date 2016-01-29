@@ -6,7 +6,7 @@ echo "Getting V2_Blockchain tools"
 sudo apt-get -y install git
 git clone https://github.com/davidjonas/v2_blockchain.git blockchain
 cd blockchain
-echo "installing geth..."
+echo "installing ethereum-go..."
 wget https://build.ethdev.com/builds/ARM%20Go%20develop%20branch/geth-ARM-latest.tar.bz2
 tar -xf geth-ARM-latest.tar.bz2
 rm geth-ARM-latest.tar.bz2
