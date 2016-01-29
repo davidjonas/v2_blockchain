@@ -22,7 +22,6 @@ cd cpp-ethereum/build
 cmake -DJSONRPC=OFF -DMINER=OFF -DETHKEY=OFF -DSERPENT=OFF -DGUI=OFF -DTESTS=OFF -DJSCONSOLE=OFF ..
 make -j4
 make install
-which solc
 cd $HOME
 echo "installing Nodejs tools for GPIO and Ethereum..."
 sudo apt-get -y install nodejs npm
