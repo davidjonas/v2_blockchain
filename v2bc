@@ -34,6 +34,11 @@ parser.add_argument(
     help='If you want to work on a different base directory. By default it is ~/.blockchain')
 
 parser.add_argument(
+    '--load', '-l',
+    metavar='FILENAME',
+    help='Use with console to load a contract file for an existing contract on the network. these contract files are the result of deploying a contract through the editor.')
+
+parser.add_argument(
     '--no-account',
     action='store_true',
     help='Do not automatically create an account on the new Node')
@@ -47,14 +52,18 @@ node = config.getNodeById(args["id"])
 
 if args["command"] == "create":
     if node is None:
-        config.createNode(args["id"])
+        if args["no-account"]:
+            config.createNode(args["id"], create_account=False)
+        else:
+            config.createNode(args["id"])
     else:
         print("Error: Node already exists.")
 
 elif args["command"] == "console":
-    subprocess.call("geth " + config.getConfigString(node) + " console", shell=True)
+    subprocess.call("geth " + config.getConfigString(node) + " --unlock 0 console", shell=True)
 
 elif args["command"] == "attach":
+    print("geth attach "+config.path+"/"+node.data_dir+"/geth.ipc")
     subprocess.call("geth attach "+config.path+"/"+node.data_dir+"/geth.ipc",shell=True)
 
 elif args["command"] == "start":
@@ -69,7 +78,7 @@ elif args["command"] == "run":
     if node is None:
         print("Error: Node not found.")
     else:
-        subprocess.call("geth " + config.getConfigString(node) + args["geth-commands"], shell=True)
+        subprocess.call("geth " + config.getConfigString(node) + " " + " ".join(args["geth_commands"]), shell=True)
 
 elif args["command"] == "configstring":
     if node is None:

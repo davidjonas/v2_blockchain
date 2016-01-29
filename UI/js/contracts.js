@@ -76,6 +76,7 @@ Editor.prototype.compile = function ()
   }
   if (compiledContracts.length == 1)
   {
+    this.mainContractName = compiledContracts[0];
     var code = compiled[compiledContracts[0]].code;
     var abi = compiled[compiledContracts[0]].info.abiDefinition;
   }
@@ -92,9 +93,26 @@ Editor.prototype.compile = function ()
                 editor.currentContract = contract;
                 p('Contract has been mined!');
                 p('new contract address: ' + editor.currentContract.address, "#00FF00");
-                p("Done");
+                p("Done, Downloading contract file...");
+                editor.downloadContract();
             }
         });
+};
+
+Editor.prototype.downloadContract = function ()
+{
+  var filename = editor.mainContractName + ".json";
+  var element = document.createElement('a');
+  var text = JSON.stringify(editor.currentContract);
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
 };
 
 $(function () {
