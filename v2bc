@@ -52,7 +52,7 @@ node = config.getNodeById(args["id"])
 
 if args["command"] == "create":
     if node is None:
-        if args["no-account"]:
+        if args["no_account"]:
             config.createNode(args["id"], create_account=False)
         else:
             config.createNode(args["id"])
