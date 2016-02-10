@@ -16,13 +16,14 @@ export PATH=$PATH:$HOME/blockchain
 echo "export PATH=\$PATH:\$HOME/blockchain" >> ~/.bashrc
 source ~/.bashrc
 echo "Building Solidity compiler"
+sudo apt-get install cmake
 git clone https://github.com/ethereum/cpp-ethereum.git
 mkdir cpp-ethereum/build
 cd cpp-ethereum/build
 cmake -DJSONRPC=OFF -DMINER=OFF -DETHKEY=OFF -DSERPENT=OFF -DGUI=OFF -DTESTS=OFF -DJSCONSOLE=OFF ..
 make -j4
 make install
-cd $HOME
+cd $HOME/blockchain
 echo "installing Nodejs tools for GPIO and Ethereum..."
 sudo apt-get -y install nodejs npm
 mkdir nodejs

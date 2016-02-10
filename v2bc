@@ -43,6 +43,12 @@ parser.add_argument(
     action='store_true',
     help='Do not automatically create an account on the new Node')
 
+parser.add_argument(
+    '--unlock',
+    action='store_true',
+    help='Use with console: Unlock the coinbase for this node.')
+
+
 parsed = parser.parse_args()
 args = vars(parsed)
 blockchainPath = args["base_dir"]
@@ -60,7 +66,11 @@ if args["command"] == "create":
         print("Error: Node already exists.")
 
 elif args["command"] == "console":
-    subprocess.call("geth " + config.getConfigString(node) + " --unlock 0 console", shell=True)
+    if args["unlock"]:
+        subprocess.call("geth " + config.getConfigString(node) + " --unlock 0 console", shell=True)
+    else:
+        subprocess.call("geth " + config.getConfigString(node) + " console", shell=True)
+
 
 elif args["command"] == "attach":
     print("geth attach "+config.path+"/"+node.data_dir+"/geth.ipc")
