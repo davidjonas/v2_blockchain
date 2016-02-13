@@ -24,7 +24,9 @@ curl https://raw.githubusercontent.com/davidjonas/v2_blockchain/master/installer
 # Usage:
 
 ### Help on all the options:
+```shell
 v2bc --help
+```
 
 ### Creating a node and an account (multiple can be created and ran on the same machine):
 ```shell
