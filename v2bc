@@ -36,7 +36,7 @@ parser.add_argument(
 parser.add_argument(
     '--load', '-l',
     metavar='FILENAME',
-    help='Use with console to load a contract file for an existing contract on the network. these contract files are the result of deploying a contract through the editor.')
+    help='[UNIMPLEMENTED] Use with console to load a contract file for an existing contract on the network. these contract files are the result of deploying a contract through the editor.')
 
 parser.add_argument(
     '--no-account',

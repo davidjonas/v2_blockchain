@@ -28,6 +28,8 @@ echo "installing Nodejs tools for GPIO and Ethereum..."
 sudo apt-get -y install nodejs npm
 mkdir nodejs
 cd nodejs
-npm install web3 onoff gpio-stream
+npm install web3
+npm install gpio-stream
+npm install onoff
 echo "installing python tools"
-pip install ethereum-ipc-client web3
+pip install ethereum-ipc-client
