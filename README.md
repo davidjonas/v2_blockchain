@@ -23,42 +23,42 @@ curl https://raw.githubusercontent.com/davidjonas/v2_blockchain/master/installer
 
 # Usage:
 
-## Help on all the options:
+### Help on all the options:
 v2bc --help
 
-## Creating a node and an account (multiple can be created and ran on the same machine):
+### Creating a node and an account (multiple can be created and ran on the same machine):
 ```shell
 v2bc -i NODENAME create
 ```
 
-## Listing all the created nodes on this machine:
+### Listing all the created nodes on this machine:
 ```shell
 v2bc list
 ```
 
-## Starting the node:
+### Starting the node:
 ```shell
 v2bc -i NODENAME start
 ```
 
-## Or interactive mode:
+### Or interactive mode:
 ```shell
 v2bc -i NODENAME console
 ```
 
-## Attaching a console to a running node:
+### Attaching a console to a running node:
 ```shell
 v2bc -i NODENAME attach
 ```
 
-## Starting the node and unlocking the account:
+### Starting the node and unlocking the account:
 ```shell
 v2bc -i NODENAME console --unlock
 ```
 (You will need to type the passphrase for the account as the first input when starting the console)
 (This is necessary to submit contracts with the editor)
 
-## Runing a miner:
+### Runing a miner:
 ```shell
 v2bc -i NODENAME mine
 ```
@@ -66,14 +66,14 @@ v2bc -i NODENAME mine
 # Smart contract editor:
 The smart contract editor needs to be ran on a node. The node needs to be running on the machine with the --unlock option or the coinbase user of that node needs to be unlocked in the console before submitting the contract. The editor creates a small HTTP server running on port 8888 to render the UI but the editor will only work locally.
 
-## Starting the editor (On a new terminal):
+### Starting the editor (On a new terminal):
 ```shell
 v2bc -i NODENAME editor
 ```
 
 The editor accepts solidity input and compiles it, sends it to the node and submits it to the network by sending a transaction on the blockchain. It will then wait for the contract to be mined, once it gets mined it will display the address of the new contract and generate/download a json file with the contract information. This file has the necessary information to call the contract. That would be the address (hash) of the contract and the ABI (Application Binary Interface)
 
-## Running the contracts
+### Running the contracts
 Helpers for loading contract json files and calling functions are not yet implemented. They are pretty easy to do though through the console or by connecting to the node from nodejs, python, javascript or any other programing language through the RPC JSON protocol or the IPC socket offered by geth.
 
 # Links
