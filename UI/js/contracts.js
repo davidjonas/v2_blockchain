@@ -74,11 +74,11 @@ Editor.prototype.compile = function ()
     p("Compiled contract " + c);
     compiledContracts[compiledContracts.length] = c;
   }
-  if (compiledContracts.length == 1)
+  if (compiledContracts.length > 0)
   {
-    this.mainContractName = compiledContracts[0];
-    var code = compiled[compiledContracts[0]].code;
-    var abi = compiled[compiledContracts[0]].info.abiDefinition;
+    this.mainContractName = compiledContracts[compiledContracts.length-1];
+    var code = compiled[compiledContracts[compiledContracts.length-1]].code;
+    var abi = compiled[compiledContracts[compiledContracts.length-1]].info.abiDefinition;
   }
   this.currentContract;
   this.web3.eth.defaultAccount = this.account;
