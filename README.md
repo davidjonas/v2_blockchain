@@ -65,6 +65,13 @@ v2bc -i NODENAME console --unlock
 v2bc -i NODENAME mine
 ```
 
+### Getting the config string:
+```shell
+v2bc -i NODENAME configstring
+```
+
+This will print out all the configurations used for this node. Basically this string can be copy/pasted into the geth command to run that node. This might be useful when someone wants to run a node with some special configurations.
+
 # Smart contract editor:
 The smart contract editor needs to be ran on a node. The node needs to be running on the machine with the --unlock option or the coinbase user of that node needs to be unlocked in the console before submitting the contract. The editor creates a small HTTP server running on port 8888 to render the UI but the editor will only work locally.
 
