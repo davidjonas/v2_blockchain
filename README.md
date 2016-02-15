@@ -84,6 +84,12 @@ The editor accepts solidity input and compiles it, sends it to the node and subm
 
 ### Running the contracts
 Helpers for loading contract json files and calling functions are not yet implemented. They are pretty easy to do though through the console or by connecting to the node from nodejs, python, javascript or any other programing language through the RPC JSON protocol or the IPC socket offered by geth.
+The installer also installs some tools to facilitate this process and make this possible.
+
+- python ethereum-ipc-client: https://github.com/pipermerriam/ethereum-ipc-client
+- Nodejs web3 package (installed by the installers in ~/blockchain/nodejs): https://github.com/ethereum/web3.js/tree/master
+- Nodejs gpio-stream package (installed by the installers in ~/blockchain/nodejs in Raspberry pi only): https://www.npmjs.com/package/gpio-stream
+- Javascript web3.js is used to create the contract editor so the code can be used as example (Check the UI folder).
 
 # Links
 Understanding the Blockchain:
