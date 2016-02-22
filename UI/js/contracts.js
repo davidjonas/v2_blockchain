@@ -30,6 +30,11 @@ function compileHandler()
   editor.compile();
 }
 
+function downloadCode()
+{
+  editor.downloadCode();
+}
+
 var Editor = function (URL, port)
 {
   p("Starting smart contract editor...", "#00ff00");
@@ -84,7 +89,7 @@ Editor.prototype.compile = function ()
   this.web3.eth.defaultAccount = this.account;
 
   p("Sending transaction to blockchain. Waiting to be mined...");
-  this.web3.eth.contract(abi).new({data: code}, function (err, contract) {
+  this.web3.eth.contract(abi).new({data: code, gas:3141592, gasPrice:50000000000}, function (err, contract) {
             if(err) {
                 p(err, "#ff0000");
                 return;
@@ -103,7 +108,7 @@ Editor.prototype.downloadContract = function ()
 {
   var filename = editor.mainContractName + ".json";
   var element = document.createElement('a');
-  var text = JSON.stringify(editor.currentContract);
+  var text = JSON.stringify(this.currentContract);
   element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
   element.setAttribute('download', filename);
 
@@ -115,10 +120,27 @@ Editor.prototype.downloadContract = function ()
   document.body.removeChild(element);
 };
 
+Editor.prototype.downloadCode = function ()
+{
+  var filename = "contract.sol";
+  var element = document.createElement('a');
+  var text = this.editorEl.getValue();
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
 $(function () {
   editor = new Editor("localhost", "8000");
   $('#compile').click(compileHandler);
   $('#clearConsole').click(clearConsole);
+  $('#downloadContract').click(downloadCode);
   window.onerror = function(error, url, line) {
     p('ERROR:'+error+' URL:'+url+' L:'+line, "#FF0000");
   };

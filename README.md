@@ -18,7 +18,7 @@ curl https://raw.githubusercontent.com/davidjonas/v2_blockchain/master/installer
 
 ## Mac OSX
 ```shell
-curl https://raw.githubusercontent.com/davidjonas/v2_blockchain/master/installers/macosx.sh | sh
+curl https://raw.githubusercontent.com/davidjonas/v2_blockchain/master/installers/osx.sh | sh
 ```
 
 # Usage:

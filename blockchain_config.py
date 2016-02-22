@@ -76,21 +76,21 @@ class BlockchainConfig(object):
             #print("Blockchain directory exists. All fine.")
             pass
         else:
-            print("Creating Blockchain directory at %s" % self.path)
+            #print("Creating Blockchain directory at %s" % self.path)
             os.mkdir(self.path)
 
         if os.path.exists(self.path + "/" + self.filename):
             #print("Config file found, reading it.")
             self.load()
         else:
-            print("Creating config file at %s" % self.path + "/" + self.filename)
+            #print("Creating config file at %s" % self.path + "/" + self.filename)
             self.save()
 
         if os.path.exists(self.path + "/" + self.genesis):
             #print("Genesis file found. All fine.")
             pass
         else:
-            print("Creating genesis file at %s" % self.path + "/" + self.genesis)
+            #print("Creating genesis file at %s" % self.path + "/" + self.genesis)
             f = open(self.path + "/" + self.genesis,"w")
             f.write(V2_GENESIS)
             f.close()
@@ -113,6 +113,10 @@ class BlockchainConfig(object):
         n = Node(identity=identity, port=self.port_start+len(self.nodes), rpc_port=self.rpc_port_start+len(self.nodes))
         print("Creating data directory %s" % self.path + "/" + n.data_dir)
         os.mkdir(self.path + "/" + n.data_dir)
+        print("Creating static nodes file.")
+        f = open(self.path + "/" + n.data_dir + "/static-nodes.json", 'w')
+        f.write(self.getBootNodesJSON())
+        f.close()
         self.nodes.append(n)
         print("Saving configurations.")
         self.save()
@@ -124,6 +128,9 @@ class BlockchainConfig(object):
 
         print("All done.")
         print("Use: v2bc -i %s start" % identity)
+
+    def getBootNodesJSON(self):
+        return json.dumps(self.bootnodes)
 
     def fromObj(self, obj):
         for n in obj["nodes"]:

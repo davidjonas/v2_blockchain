@@ -124,6 +124,11 @@ pre {
   background-color: #EDB6AB;
 }
 
+#toolbox #downloadContract {
+  right: 120px;
+  background-color: #6699ff;
+}
+
 #toolbox .toolbox-btn .helptip
 {
   display: none;
