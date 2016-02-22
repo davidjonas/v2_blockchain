@@ -70,7 +70,7 @@ class BlockchainConfig(object):
         self.genesis = "CustomGenesis.json"
         self.nat = "any"
         self.network_id = 1000
-        self.bootnodes = ["enode://eb6e308b5194349790dc17a95068a1b1c8712c772ca7c3b679baacc3dd8cd8328a6608a7a32545a611e67159c0179e1498d182782b95f71fc1f4c78458fa48c7@52.30.156.83:30300"]
+        self.bootnodes = ["enode://4907c8be060c78b7d153ed565a5302767356b9646b48adf6f0f8a4b395f405ca8c80f23ce9d18a987ede1a7d67c9e3926dec1acae804355944aebc1e5eac6aa6@52.30.156.83:30300"]
 
         if os.path.isdir(self.path):
             #print("Blockchain directory exists. All fine.")
